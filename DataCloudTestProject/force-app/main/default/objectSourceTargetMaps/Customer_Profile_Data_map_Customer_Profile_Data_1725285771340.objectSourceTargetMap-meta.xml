@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ObjectSourceTargetMap xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <creationType>Custom</creationType>
+    <fieldSourceTargetMaps>
+        <creationType>System</creationType>
+        <filterApplied>false</filterApplied>
+        <isSourceFormula>true</isSourceFormula>
+        <sourceField xsi:nil="true"/>
+        <sourceFormula>&apos;AwsS3_Jamie_Test_Bucket&apos;</sourceFormula>
+        <targetField>Customer_Profile_Data__dll.DataSource__c</targetField>
+    </fieldSourceTargetMaps>
+    <fieldSourceTargetMaps>
+        <creationType>System</creationType>
+        <filterApplied>false</filterApplied>
+        <isSourceFormula>true</isSourceFormula>
+        <sourceField xsi:nil="true"/>
+        <sourceFormula>env[&apos;filename&apos;]</sourceFormula>
+        <targetField>Customer_Profile_Data__dll.DataSourceObject__c</targetField>
+    </fieldSourceTargetMaps>
+    <fieldSourceTargetMaps>
+        <creationType>Custom</creationType>
+        <filterApplied>false</filterApplied>
+        <isSourceFormula>false</isSourceFormula>
+        <sourceField>Customer_Profile_Data.Surname__c</sourceField>
+        <sourceFormula>Surname</sourceFormula>
+        <targetField>Customer_Profile_Data__dll.Surname__c</targetField>
+    </fieldSourceTargetMaps>
+    <fieldSourceTargetMaps>
+        <creationType>System</creationType>
+        <filterApplied>false</filterApplied>
+        <isSourceFormula>true</isSourceFormula>
+        <sourceField xsi:nil="true"/>
+        <targetField>Customer_Profile_Data__dll.InternalOrganization__c</targetField>
+    </fieldSourceTargetMaps>
+    <fieldSourceTargetMaps>
+        <creationType>Custom</creationType>
+        <filterApplied>false</filterApplied>
+        <isSourceFormula>false</isSourceFormula>
+        <sourceField>Customer_Profile_Data.Email__c</sourceField>
+        <sourceFormula>Email</sourceFormula>
+        <targetField>Customer_Profile_Data__dll.Email__c</targetField>
+    </fieldSourceTargetMaps>
+    <fieldSourceTargetMaps>
+        <creationType>Custom</creationType>
+        <filterApplied>false</filterApplied>
+        <isSourceFormula>false</isSourceFormula>
+        <sourceField>Customer_Profile_Data.First_Name__c</sourceField>
+        <sourceFormula>First Name</sourceFormula>
+        <targetField>Customer_Profile_Data__dll.First_Name__c</targetField>
+    </fieldSourceTargetMaps>
+    <fieldSourceTargetMaps>
+        <creationType>Custom</creationType>
+        <filterApplied>false</filterApplied>
+        <isSourceFormula>false</isSourceFormula>
+        <sourceField>Customer_Profile_Data.Birth_Date__c</sourceField>
+        <sourceFormula>Birth Date</sourceFormula>
+        <targetField>Customer_Profile_Data__dll.Birth_Date__c</targetField>
+    </fieldSourceTargetMaps>
+    <fieldSourceTargetMaps>
+        <creationType>Custom</creationType>
+        <filterApplied>false</filterApplied>
+        <isSourceFormula>false</isSourceFormula>
+        <sourceField>Customer_Profile_Data.Customer_Ref_Number__c</sourceField>
+        <sourceFormula>Customer Ref Number</sourceFormula>
+        <targetField>Customer_Profile_Data__dll.Customer_Ref_Number__c</targetField>
+    </fieldSourceTargetMaps>
+    <fieldSourceTargetMaps>
+        <creationType>Custom</creationType>
+        <filterApplied>false</filterApplied>
+        <isSourceFormula>false</isSourceFormula>
+        <sourceField>Customer_Profile_Data.Rewards_Program_ID__c</sourceField>
+        <sourceFormula>Rewards Program ID</sourceFormula>
+        <targetField>Customer_Profile_Data__dll.Rewards_Program_ID__c</targetField>
+    </fieldSourceTargetMaps>
+    <masterLabel>Customer_Profile_Data_map_Customer_Profile_Data_1725285771340</masterLabel>
+    <sourceObjectName>Customer_Profile_Data</sourceObjectName>
+    <targetObjectName>Customer_Profile_Data__dll</targetObjectName>
+</ObjectSourceTargetMap>
