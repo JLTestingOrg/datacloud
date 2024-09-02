@@ -19,34 +19,36 @@ jobs:
 
   #Setup job to setup variable values to dynamically set runner.
   #See: https://stackoverflow.com/questions/75603889/github-action-runner-does-not-react-to-self-hosted-labels-from-environments
-  setup:
-    if: github.event.pull_request.merged == true
-    environment: ${{github.ref_name == 'test' && 'TEST' || 'PROD'}}
-    name: Setup Runner Group/Label Variables
-    runs-on: ubuntu-latest #Doesn't guarantee it will run on the prod runner, just picks one at random available to the repo.
-    outputs:
-      runnername: ${{ steps.step1.outputs.runnername }}
-      runnerlabel: ${{ steps.step1.outputs.runnerlabel }}
-    steps:
-      - name: Set Variable Values
-        id: step1
-        run: |
-          echo runnername="${RUNNER_GROUP_NAME}" >> $GITHUB_OUTPUT
-          echo runnerlabel="${RUNNER_LABEL_NAME}" >> $GITHUB_OUTPUT
+  #setup:
+  #  if: github.event.pull_request.merged == true
+  #  environment: ${{github.ref_name == 'test' && 'TEST' || 'PROD'}}
+  #  name: Setup Runner Group/Label Variables
+  #  runs-on: ubuntu-latest #Doesn't guarantee it will run on the prod runner, just picks one at random available to the repo.
+  #  outputs:
+  #    runnername: ${{ steps.step1.outputs.runnername }}
+  #    runnerlabel: ${{ steps.step1.outputs.runnerlabel }}
+  #  steps:
+  #    - name: Set Variable Values
+  #     id: step1
+  #      run: |
+  #        echo runnername="${RUNNER_GROUP_NAME}" >> $GITHUB_OUTPUT
+  #        echo runnerlabel="${RUNNER_LABEL_NAME}" >> $GITHUB_OUTPUT
 
   deploy:
 
     if: github.event.pull_request.merged == true
     environment: ${{github.ref_name == 'test' && 'TEST' || 'PROD'}}
     name: 'Deploy to Salesforce'
-    needs: [setup]
+    #needs: [setup]
 
     # Github hosted runners are IP restricted in SF enterprise account, specify a self-hosted runner instead: https://docs.github.com/en/actions/using-jobs/choosing-the-runner-for-a-job
     # NOTE: Access to the self-hosted runners group "gps-github-runners" in the repository must be requested in the Slack channel "gps-github" otherwise the job stays queued and never runs.
     # Access to "gps-github-test-runners" is available by default to allow testing.
-    runs-on:
-      group: "${{needs.setup.outputs.runnername}}"
-      labels: "${{needs.setup.outputs.runnerlabel}}"
+    runs-on: self-hosted
+
+      #Use output from the setup job that references environment variables.
+      #group: "${{needs.setup.outputs.runnername}}"
+      #labels: "${{needs.setup.outputs.runnerlabel}}"
 
       #NOTE: Setting these dynamically & directly does not currently evaluate correctly and results in an error:
       #Error returned: "Error when evaluating 'runs-on' for job 'deploy'. .github/workflows/deployment_pipeline_test.yml (Line: 43, Col: 28): Unexpected value ''" 
