@@ -8,7 +8,7 @@
     <dataPlatformDataSetItemName>CONNECTORSFRAMEWORK</dataPlatformDataSetItemName>
     <dataSource>AwsS3_Jamie_Test_Bucket</dataSource>
     <isLimitedToNewFiles>false</isLimitedToNewFiles>
-    <isMissingFileFailure>false</isMissingFileFailure>
+    <isMissingFileFailure>true</isMissingFileFailure>
     <masterLabel>Customer Profile</masterLabel>
     <mktDataLakeObject>Customer_Profile__dll</mktDataLakeObject>
     <mktDataTranObject>Customer_Profile</mktDataTranObject>
