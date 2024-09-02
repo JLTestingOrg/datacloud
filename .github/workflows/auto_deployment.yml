@@ -66,7 +66,7 @@ jobs:
       - name: Install Salesforce CLI # Installing Salesforce CLI to run sfdx commands
         shell: bash
         run: |
-          npm install --global @salesforce/cli
+         sudo npm install --global @salesforce/cli
 
       #See: https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference_org_commands_unified.htm#cli_reference_org_login_jwt_unified
       - name: Authenticate Salesforce org # Authenticates Salesforce org utilizing JWT Bearer Flow
