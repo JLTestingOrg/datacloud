@@ -80,4 +80,5 @@ jobs:
       - name: Deploy Package to Target Org # Deploys Salesforce components in package to target org
         shell: bash
         run: |
-          DEPLOY_DESTINATION=${{vars.DEPLOY_DESTINATION}} sf project deploy start --target-org "myTargetOrg" --source-dir . --test-level RunLocalTests --ignore-conflicts
+          pwd
+          DEPLOY_DESTINATION=${{vars.DEPLOY_DESTINATION}} sf project deploy start --target-org "myTargetOrg" --source-dir ./DataCloudTestProject --test-level RunLocalTests --ignore-conflicts
