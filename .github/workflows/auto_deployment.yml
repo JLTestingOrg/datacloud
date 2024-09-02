@@ -79,7 +79,7 @@ jobs:
       #See: https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference_project_commands_unified.htm#cli_reference_project_deploy_start_unified
       - name: Deploy Package to Target Org # Deploys Salesforce components in package to target org
         shell: bash
-        working-directory: /DataCloudTestProject
+        working-directory: "DataCloudTestProject"
         run: |
           pwd
           DEPLOY_DESTINATION=${{vars.DEPLOY_DESTINATION}} sf project deploy start --target-org "myTargetOrg" --source-dir . --test-level RunLocalTests --ignore-conflicts
