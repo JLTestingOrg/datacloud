@@ -9,7 +9,7 @@
     <dataSource>AwsS3_Jamie_Test_Bucket</dataSource>
     <isLimitedToNewFiles>false</isLimitedToNewFiles>
     <isMissingFileFailure>true</isMissingFileFailure>
-    <masterLabel>Customer Profile</masterLabel>
-    <mktDataLakeObject>Customer_Profile__dll</mktDataLakeObject>
-    <mktDataTranObject>Customer_Profile</mktDataTranObject>
+    <masterLabel>Customer Profile Data</masterLabel>
+    <mktDataLakeObject>Customer_Profile_Data__dll</mktDataLakeObject>
+    <mktDataTranObject>Customer_Profile_Data</mktDataTranObject>
 </DataStreamDefinition>
