@@ -1,0 +1,80 @@
+# This is a basic workflow that is triggered by a Pull Request being closed to the "test" or "main" branch. 
+# It is parameterised using environment variables to deploy to the appropriate SF environment.
+
+name: Automated Deployment
+
+on:
+  pull_request: 
+    branches:
+      - test
+      - main
+    types:
+      - closed
+
+env:
+  RUNNER_GROUP_NAME: ${{vars.RUNNER_NAME}}
+  RUNNER_LABEL_NAME: ${{vars.RUNNER_LABEL_NAME}}      
+  
+jobs:
+
+  #Setup job to setup variable values to dynamically set runner.
+  #See: https://stackoverflow.com/questions/75603889/github-action-runner-does-not-react-to-self-hosted-labels-from-environments
+  setup:
+    if: github.event.pull_request.merged == true
+    environment: ${{github.ref_name == 'test' && 'TEST' || 'PROD'}}
+    name: Setup Runner Group/Label Variables
+    runs-on: ubuntu-latest #Doesn't guarantee it will run on the prod runner, just picks one at random available to the repo.
+    outputs:
+      runnername: ${{ steps.step1.outputs.runnername }}
+      runnerlabel: ${{ steps.step1.outputs.runnerlabel }}
+    steps:
+      - name: Set Variable Values
+        id: step1
+        run: |
+          echo runnername="${RUNNER_GROUP_NAME}" >> $GITHUB_OUTPUT
+          echo runnerlabel="${RUNNER_LABEL_NAME}" >> $GITHUB_OUTPUT
+
+  deploy:
+
+    if: github.event.pull_request.merged == true
+    environment: ${{github.ref_name == 'test' && 'TEST' || 'PROD'}}
+    name: 'Deploy to Salesforce'
+    needs: [setup]
+
+    # Github hosted runners are IP restricted in SF enterprise account, specify a self-hosted runner instead: https://docs.github.com/en/actions/using-jobs/choosing-the-runner-for-a-job
+    # NOTE: Access to the self-hosted runners group "gps-github-runners" in the repository must be requested in the Slack channel "gps-github" otherwise the job stays queued and never runs.
+    # Access to "gps-github-test-runners" is available by default to allow testing.
+    runs-on:
+      group: "${{needs.setup.outputs.runnername}}"
+      labels: "${{needs.setup.outputs.runnerlabel}}"
+
+      #NOTE: Setting these dynamically & directly does not currently evaluate correctly and results in an error:
+      #Error returned: "Error when evaluating 'runs-on' for job 'deploy'. .github/workflows/deployment_pipeline_test.yml (Line: 43, Col: 28): Unexpected value ''" 
+      #group: ${{vars.RUNNER_NAME}} 
+      #labels: ${{vars.RUNNER_LABEL_NAME}}
+      
+      #NOTE: Setting these dynamically based on environment variables directly also doesn't work and results in the output of a string containing the variable name.
+      #Error returned: "Unable to find self-hosted runner group: '${RUNNER_GROUP_NAME}'."
+      #group: "${RUNNER_GROUP_NAME}"
+      #labels: "${RUNNER_LABEL_NAME}"
+      
+    steps:
+      - uses: actions/checkout@v4 # Checks out git repository
+
+      - name: Install Salesforce CLI # Installing Salesforce CLI to run sfdx commands
+        shell: bash
+        run: |
+          npm install --global @salesforce/cli
+
+      #See: https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference_org_commands_unified.htm#cli_reference_org_login_jwt_unified
+      - name: Authenticate Salesforce org # Authenticates Salesforce org utilizing JWT Bearer Flow
+        shell: bash
+        run: |
+          echo "${{secrets.JWTKEY}}" > server.key
+          sf org login jwt --jwt-key-file server.key --client-id ${{secrets.SALESFORCE_CONSUMER_KEY}} --username ${{vars.ORG_USERNAME}} --instance-url ${{vars.ORG_URL}} --alias myTargetOrg --set-default 
+
+      #See: https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference_project_commands_unified.htm#cli_reference_project_deploy_start_unified
+      - name: Deploy Package to Target Org # Deploys Salesforce components in package to target org
+        shell: bash
+        run: |
+          DEPLOY_DESTINATION=${{vars.DEPLOY_DESTINATION}} sf project deploy start --target-org "myTargetOrg" --source-dir . --test-level RunLocalTests --ignore-conflicts
