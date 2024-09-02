@@ -63,10 +63,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4 # Checks out git repository
 
-      - name: Install Salesforce CLI # Installing Salesforce CLI to run sfdx commands
-        shell: bash
-        run: |
-          sudo npm install --global @salesforce/cli
+      #NOTE: Commented out for now. Running on a self hosted run (my Mac!) which already has the CLI installed.
+      #- name: Install Salesforce CLI # Installing Salesforce CLI to run sfdx commands
+      #  shell: bash
+      #  run: |
+      #    sudo npm install --global @salesforce/cli
 
       #See: https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference_org_commands_unified.htm#cli_reference_org_login_jwt_unified
       - name: Authenticate Salesforce org # Authenticates Salesforce org utilizing JWT Bearer Flow
