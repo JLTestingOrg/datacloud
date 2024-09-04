@@ -2,11 +2,23 @@
   "packageDirectories": [
     {
       "path": "force-app",
-      "default": true
+      "package": "DataCloudDeployTest3",
+      "versionName": "ver 0.1",
+      "versionNumber": "0.1.0.NEXT",
+      "default": true,
+      "versionDescription": ""
     }
   ],
   "name": "DataCloudTestProject",
   "namespace": "vigneshns",
   "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "61.0"
+  "sourceApiVersion": "61.0",
+  "packageAliases": {
+    "DataCloudDeployTest3": "0HoQH0000000Ogf0AE"
+  },
+  "dependencies": [
+    {
+      "package": "0A3QH000000CgoI"
+    }
+  ]
 }
