@@ -30,6 +30,10 @@
 	</types>
 	<types>
 		<members>*</members>
+		<name>DataKitObjectTemplate</name>
+	</types>
+	<types>
+		<members>*</members>
 		<name>DataCalcInsightTemplate</name>
 	</types>
 	<version>59.0</version>
