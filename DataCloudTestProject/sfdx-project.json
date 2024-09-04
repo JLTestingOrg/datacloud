@@ -6,7 +6,7 @@
     }
   ],
   "name": "DataCloudTestProject",
-  "namespace": "",
+  "namespace": "vigneshns",
   "sfdcLoginUrl": "https://login.salesforce.com",
   "sourceApiVersion": "61.0"
 }
