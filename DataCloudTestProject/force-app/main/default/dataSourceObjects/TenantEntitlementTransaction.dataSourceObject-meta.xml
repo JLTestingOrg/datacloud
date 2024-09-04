@@ -3,5 +3,4 @@
     <dataSource>SalesforceDotCom_Home</dataSource>
     <externalRecordIdentifier>TenantEntitlementTransaction</externalRecordIdentifier>
     <masterLabel>TenantEntitlementTransaction</masterLabel>
-    <templateVersion>1</templateVersion>
 </DataSourceObject>

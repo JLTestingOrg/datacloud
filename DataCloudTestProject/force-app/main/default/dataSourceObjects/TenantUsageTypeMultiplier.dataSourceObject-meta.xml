@@ -3,5 +3,4 @@
     <dataSource>SalesforceDotCom_Home</dataSource>
     <externalRecordIdentifier>TenantUsageTypeMultiplier</externalRecordIdentifier>
     <masterLabel>TenantUsageTypeMultiplier</masterLabel>
-    <templateVersion>1</templateVersion>
 </DataSourceObject>

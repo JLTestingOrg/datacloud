@@ -3,5 +3,4 @@
     <dataSource>TenantBillingUsageEvent</dataSource>
     <externalRecordIdentifier>TenantBillingUsageDataTransportEntity</externalRecordIdentifier>
     <masterLabel>TenantBillingUsageDataTransportEntity</masterLabel>
-    <templateVersion>1</templateVersion>
 </DataSourceObject>
